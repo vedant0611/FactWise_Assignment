@@ -32,4 +32,23 @@ class TeamSerializer(serializers.ModelSerializer):
         model = Team
         fields = ['id', 'name', 'description', 'admin', 'members', 'creation_time']
 
+# serializers.py
+
+from rest_framework import serializers
+from .models import Team, Board, Task
+
+class TeamSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Team
+        fields = ['id', 'name']  # Adjust fields as needed
+
+class BoardSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Board
+        fields = '__all__'  # Include all fields for now
+
+class TaskSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Task
+        fields = '__all__'  # Include all fields for now
 

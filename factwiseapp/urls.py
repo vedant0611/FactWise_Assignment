@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import CreateTeamView, ListTeamsView, RetrieveUpdateDestroyTeamView, AddUsersToTeamView, RemoveUsersFromTeamView, ListTeamUsersView,CreateUserView, ListUsersView, DescribeUserView, UpdateUserView, GetUserTeamsView
+from .views import CreateTeamView, ListTeamsView, RetrieveUpdateDestroyTeamView, AddUsersToTeamView, RemoveUsersFromTeamView, ListTeamUsersView,CreateUserView, ListUsersView, DescribeUserView, UpdateUserView, GetUserTeamsView,CreateBoardView
 
 urlpatterns = [
     path('create_team/', CreateTeamView.as_view(), name='create-team'),
@@ -15,6 +15,9 @@ urlpatterns = [
     path('describe_user/', DescribeUserView.as_view(), name='describe_user'),
     path('update_user/', UpdateUserView.as_view(), name='update_user'),
     path('get_user_teams/', GetUserTeamsView.as_view(), name='get_user_teams'),
+
+
+    path('create_board/', CreateBoardView.as_view(), name='create-board')
 
 ]
 

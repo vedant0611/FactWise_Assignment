@@ -1,18 +1,21 @@
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import User, Team ,User_base, Team, TeamMembership
-from .serializers import UserSerializer, TeamSerializer,UserBaseSerializer, TeamSerializer, TeamMembershipSerializer
+from .models import User, Team, User_base, TeamMembership
+from .serializers import UserSerializer, TeamSerializer, UserBaseSerializer, TeamMembershipSerializer
 import json
 
 
 class CreateTeamView(APIView):
-    def post(self, request):
-        serializer = TeamSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+        def post(self, request):
+            print(request.data)
+            serializer = TeamSerializer(data=request.data)
+            print(serializer)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class ListTeamsView(APIView):
     def get(self, request):
@@ -94,12 +97,6 @@ class ListTeamUsersView(APIView):
         except Team.DoesNotExist:
             return Response({'error': 'Team does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
-
-
-
-
-
-
 class CreateUserView(APIView):
     def post(self, request):
         data = json.loads(request.body)
@@ -154,3 +151,14 @@ class GetUserTeamsView(APIView):
             return Response(serializer.data)
         except User_base.DoesNotExist:
             return Response({'error': 'User does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+from .models import Team, Board, Task
+from .serializers import TeamSerializer, BoardSerializer, TaskSerializer
+
+class CreateBoardView(APIView):
+    def post(self, request):
+        serializer = BoardSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
